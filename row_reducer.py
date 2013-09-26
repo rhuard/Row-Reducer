@@ -15,6 +15,7 @@ class Matrix:
 		
 		for i in range(self._rows):
 			
+			#fill in each row of the matrix
 			matrix_row = []
 			for j in range(self._cols):
 				matrix_row.append(int(input("please enter the number for location [" + str(i) + "][" + str(j) + "]")))
