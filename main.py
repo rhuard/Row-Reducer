@@ -13,6 +13,7 @@ def main():
 	
 	matrix = M.Matrix()
 	matrix.printMatrix()
+	matrix.isInEchelonForm()
 
 
 

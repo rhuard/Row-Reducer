@@ -6,6 +6,7 @@ class Matrix:
 	_matrix = []
 	_rows = 0
 	_cols = 0
+	_pivots = []
 
 	def __init__(self):
 		'''init method for class Matrix
@@ -85,10 +86,43 @@ class Matrix:
 		for i in range(self._cols):
 			self._matrix[row1][i] = self._matrix[row1][i] + (self._matrix[row2][i] * scaler)
 		
+	def findPivots(self):
+		'''fine Pivots
+		finds the pivots in the matrix
+		input: void
+		output: list of tuples of the indicies of a matrix
+		preconditions: there is a concrete matrix
+		postconditions: a list containg the the indecies as tuples will be returned
+		created: 06 Nov 2013
+		last updated: 06 Nov 2013'''
+
+		has_pivot = False #the row already has a pivot
+		pivots = []		
+
+		for i in range(self._rows):
+			for j in range(self._cols):
+				if(self._matrix[i][j] != 0 and has_pivot == False):
+					pivots.append((i,j))
+					has_pivot = True
+
+			has_pivot = False
+		return pivots
+
+	def isInEchelonForm(self):
+		'''is in Echelon Form
+		checks to see if the matrix is in echelon form
+		input: void
+		output: boolean
+		preconditions: the matrix has been made concrete
+		postconditions: a true or false will be returned based on if the matrix is in echelon form or not
+		created: 06 Nov 2013
+		last updated: 06 Nov 2013'''
+		
+		self._pivots = self.findPivots()
+		#todo: finish this method
 
 
-
-
+		
 
 
 
