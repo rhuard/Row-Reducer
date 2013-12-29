@@ -1,6 +1,8 @@
 #Matrix Library
 #writen by Ryan Huard
 
+import os
+
 class Matrix:
 
 	_matrix = []
@@ -18,17 +20,40 @@ class Matrix:
 		created: 25 Sep 2013
 		last updated: 25 sep 2013'''
 
-		self._rows = int(input("Please enter the number of rows: "))
-		self._cols = int(input("Please enter the number of columns: "))
+		con = True
+		while(con == True):
+			print("please enter the matrix you would like to use\n")
+			self._rows = int(input("Please enter the number of rows: "))
+			self._cols = int(input("Please enter the number of columns: "))
 		
-		for i in range(self._rows):
+			for i in range(self._rows):
 			
-			#fill in each row of the matrix
-			matrix_row = []
-			for j in range(self._cols):
-				matrix_row.append(int(input("please enter the number for location [" + str(i) + "][" + str(j) + "]")))
+				#fill in each row of the matrix
+				matrix_row = []
+				for j in range(self._cols):
+					matrix_row.append(int(input("please enter the number for location [" + str(i) + "][" + str(j) + "]")))
 			
-			self._matrix.append(matrix_row)
+				self._matrix.append(matrix_row)
+
+			#make sure the user put in the right matrix
+			good = False
+			print("\n***is this the right matrix?")
+			
+			answer = False
+			while(answer == False):
+				good = int(input("1-yes\n2-No\n"))
+		
+				if(good != 1 and good != 2):
+					print("that was unrecognized please try again")
+				else:
+					answer = True
+				
+					if(good == 1):
+						con = False
+					else:
+						con = True
+
+		os.system("cls" if os.name == "nt" else "clear")
 
 	
 	def printMatrix(self):
@@ -108,21 +133,63 @@ class Matrix:
 			has_pivot = False
 		return pivots
 
-	def isInEchelonForm(self):
-		'''is in Echelon Form
-		checks to see if the matrix is in echelon form
+
+	def menu(self):
+		'''Menu
+		displays a menue for the start of the prgram
 		input: void
-		output: boolean
-		preconditions: the matrix has been made concrete
-		postconditions: a true or false will be returned based on if the matrix is in echelon form or not
-		created: 06 Nov 2013
-		last updated: 06 Nov 2013'''
+		output: void
+		preconditions: program will be started
+		postconditions: the menu option will be executed
+		created: 28 Dec 2013
+		last update: 28 Dec 2013'''
+	
+		con = True
+		while(con == True):	
+			print("***WELCOME***\n***Matrix Reducton Program***")
+			print("please enter a choice:")
+			print("1-Manually Reduce Matrix")
+			print("2-Automatically Reduce Matrix")
+			print("0-Exit")
+
+			choice = int(input("please enter your choice: "))
+			
+			if(choice != 1 and choice != 2 and choice != 0):
+				print("I am sorry that was an unknown option, please try again")
+				con = True
+			else:
+				con = False
+
+		if(choice == 1):
+			self.manualReduction()
+		elif(choice == 2):
+			self.automaticReduction()
+		elif(choice == 0):
+			quit()
+		else:
+			print("there was an error [0]")
+
+	def manualReduction(self):
+		'''Manual Reduction
+		starts reducing the matrix by user input
+		input: void
+		output: void
+		preconditions: the manual is chosen
+		postconditions: the matrix can be manually reduced
+		created: 28 Dec 2013
+		last update: 28 Dec 2013'''
 		
-		self._pivots = self.findPivots()
-		#todo: finish this method
+		print("this feature has not been fully implemented yet")
+		#TODO: Finish manual reduction
 
-
-		
-
-
-
+	def automaticReduction(self):
+		'''Automatic Reduction
+		starts reducing the matrix automatically
+		input: void
+		output: void
+		preconditions: the automatic option has been chosen
+		postconditions: the matrix will be automatically reduced by the program
+		created: 28 Dec 2013
+		last updated: 28 Dec 2013'''
+		print("this feature has not been implemented yet")
+		#TODO: Finish automatic Reduction

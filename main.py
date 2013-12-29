@@ -12,10 +12,7 @@ import Matrix as M
 def main():
 	
 	matrix = M.Matrix()
-	matrix.printMatrix()
-	matrix.isInEchelonForm()
-
-
+	matrix.menu()
 
 
 main()
