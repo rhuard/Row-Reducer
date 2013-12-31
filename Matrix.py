@@ -1,6 +1,8 @@
 #Matrix Library
 #writen by Ryan Huard
 
+#TODO: make this program able to take doubles instead of ints
+
 import os
 
 class Matrix:
@@ -18,8 +20,12 @@ class Matrix:
 		preconditions: an object of Matrix is created
 		postconditions: the Matrix object will be initalized
 		created: 25 Sep 2013
-		last updated: 25 sep 2013'''
+		last updated: 30 dec 2013
 
+		update record:
+			30 dec 2013: set to clear the consol window'''
+		
+		os.system("cls" if os.name == "nt" else "clear")
 		con = True
 		while(con == True):
 			print("please enter the matrix you would like to use\n")
@@ -31,7 +37,7 @@ class Matrix:
 				#fill in each row of the matrix
 				matrix_row = []
 				for j in range(self._cols):
-					matrix_row.append(int(input("please enter the number for location [" + str(i) + "][" + str(j) + "]")))
+					matrix_row.append(int(input("please enter the number for location [" + str(i + 1) + "][" + str(j + 1) + "]")))
 			
 				self._matrix.append(matrix_row)
 
@@ -64,8 +70,12 @@ class Matrix:
 		preconditions: the Matrix object will be made concrete
 		postconditions: the Matrix object will be printed to the screen
 		created: 25 sep 2013
-		last updated: 25 sep 2013'''
+		last updated: 30 Dec 2013
+
+		update record:
+			30 Dec 2013 - added the clear to the beginning of the function'''
 		
+		os.system("cls" if os.name == "nt" else "clear")
 		for i in range(self._rows):
 			print("[ ", end = "")
 			for j in range(self._cols):
@@ -133,6 +143,7 @@ class Matrix:
 			has_pivot = False
 		return pivots
 
+#end row operations, start program features
 
 	def menu(self):
 		'''Menu
@@ -162,8 +173,12 @@ class Matrix:
 
 		if(choice == 1):
 			self.manualReduction()
+			self.printMatrix()
+			print("ths is your final matrix")
 		elif(choice == 2):
 			self.automaticReduction()
+			self.printMatrix()
+			print("ths is your final matrix")
 		elif(choice == 0):
 			quit()
 		else:
@@ -177,10 +192,72 @@ class Matrix:
 		preconditions: the manual is chosen
 		postconditions: the matrix can be manually reduced
 		created: 28 Dec 2013
-		last update: 28 Dec 2013'''
+		last update: 30 Dec 2013
+
+		update record:
+			30 Dec 2013 - finished method'''
 		
-		print("this feature has not been fully implemented yet")
-		#TODO: Finish manual reduction
+		finished = False
+		while(finished == False):
+			self.printMatrix()
+			row_op = -1
+			row_op =self.getRowOperation()
+			if(row_op == 1): #TODO: get error checking into this function
+				#scale
+				row = int(input("please input the row you want to scale: ")) - 1
+				scaler = int(input("please input the scaler you would want to scale by: "))
+				self.scaleRow(row, scaler)
+			elif(row_op == 2):
+				#swap
+				row1 = int(input("please enter the first row you would like to swap: ")) - 1
+				row2 = int(input("please enter the second row you would like to swap: ")) - 1
+				self.swapRow(row1, row2)
+			elif(row_op == 3):
+				#replace
+				row1 = int(input("please enter the row you would like to replace: ")) - 1
+				row2 = int(input("please enter the row you would like to replace the previous row with: ")) - 1
+				scaler = int(input("please enter the scaler you would like to use for the replacement: "))
+				self.replaceRow(row1, row2, scaler)
+			elif(row_op == 0):
+				#do nothing
+				print("nothing will be changed in the matrix")
+			else:
+				print("There was an error [2] getting the wanted row operation. stopping execution")
+				quit()
+			self.printMatrix()
+			#Check to see if done
+			con = True
+			while(con == True):
+				choice = int(input("would you like to continue:\n1-Yes\n2-No\n:"))
+				if(choice != 1 and choice != 2):
+					print("I am sorry that is an invalid option, please try again")
+				else:
+					con = False
+			if(choice == 1):
+				finished = False #keep going
+			else:
+				finished = True #end
+
+	def getRowOperation(self):
+		'''Get Row Operation
+		   gets the user input for the wanted row operation
+		   input: void
+		   output: an integer representing the wanted row operation
+		   preconditions: manual reduction is running
+		   postconditios: an operation will take place
+		   created: 30 Dec 2013
+		   last updated: 30 Dec 2013'''
+		
+		valid_choice = False
+		while(valid_choice == False):
+			print("what row operation would you like?")
+			row_op = int(input("1-Scale\n2-Swap\n3-Replace\n0-Get Me Outta Here!!\n:"))
+
+			if(row_op != 0 and row_op != 1 and row_op != 2 and row_op != 3):
+				print("that was an invalid option please try again")
+			else:
+				valid_choice = True
+		return row_op
 
 	def automaticReduction(self):
 		'''Automatic Reduction
@@ -192,4 +269,5 @@ class Matrix:
 		created: 28 Dec 2013
 		last updated: 28 Dec 2013'''
 		print("this feature has not been implemented yet")
+		input("please press any key to contine:")
 		#TODO: Finish automatic Reduction
