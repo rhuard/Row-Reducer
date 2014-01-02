@@ -11,6 +11,7 @@ class Matrix:
 	_rows = 0
 	_cols = 0
 	_pivots = []
+	_operations = []
 
 	def __init__(self):
 		'''init method for class Matrix
@@ -37,7 +38,7 @@ class Matrix:
 				#fill in each row of the matrix
 				matrix_row = []
 				for j in range(self._cols):
-					matrix_row.append(int(input("please enter the number for location [" + str(i + 1) + "][" + str(j + 1) + "]")))
+					matrix_row.append(float(input("please enter the number for location [" + str(i + 1) + "][" + str(j + 1) + "]")))
 			
 				self._matrix.append(matrix_row)
 
@@ -94,6 +95,7 @@ class Matrix:
 		last updated: 30 sep 2013'''
 
 		self._matrix[row1], self._matrix[row2] = self._matrix[row2], self._matrix[row1]
+		self._operations.append("swap: row: " + str(row1 + 1) + " with row: " + str(row2 + 1))
 
 	def scaleRow(self, row, scaler):
 		'''Scale Row
@@ -107,6 +109,7 @@ class Matrix:
 
 		for i in range(self._cols):
 			self._matrix[row][i] *= scaler
+		self._operations.append("scaled row: " + str(row + 1) + " by: " + str(scaler))
 
 	def replaceRow(self, row1, row2, scaler):
 		'''Replace Row
@@ -120,6 +123,7 @@ class Matrix:
 
 		for i in range(self._cols):
 			self._matrix[row1][i] = self._matrix[row1][i] + (self._matrix[row2][i] * scaler)
+		self._operations.append("replaced row: " + str(row1 + 1) + " with row: " + str(row2 + 1) + " multiplyed by: " + str(scaler))
 		
 	def findPivots(self):
 		'''fine Pivots
@@ -175,10 +179,12 @@ class Matrix:
 			self.manualReduction()
 			self.printMatrix()
 			print("ths is your final matrix")
+			self.printOperations()
 		elif(choice == 2):
 			self.automaticReduction()
 			self.printMatrix()
 			print("ths is your final matrix")
+			self.printOperations()
 		elif(choice == 0):
 			quit()
 		else:
@@ -205,7 +211,7 @@ class Matrix:
 			if(row_op == 1): #TODO: get error checking into this function
 				#scale
 				row = int(input("please input the row you want to scale: ")) - 1
-				scaler = int(input("please input the scaler you would want to scale by: "))
+				scaler = float(input("please input the scaler you would want to scale by: "))
 				self.scaleRow(row, scaler)
 			elif(row_op == 2):
 				#swap
@@ -216,7 +222,7 @@ class Matrix:
 				#replace
 				row1 = int(input("please enter the row you would like to replace: ")) - 1
 				row2 = int(input("please enter the row you would like to replace the previous row with: ")) - 1
-				scaler = int(input("please enter the scaler you would like to use for the replacement: "))
+				scaler = float(input("please enter the scaler you would like to use for the replacement: "))
 				self.replaceRow(row1, row2, scaler)
 			elif(row_op == 0):
 				#do nothing
@@ -229,7 +235,7 @@ class Matrix:
 			con = True
 			while(con == True):
 				choice = int(input("would you like to continue:\n1-Yes\n2-No\n:"))
-				if(choice != 1 and choice != 2):
+				if(choice != 1 and choice != 2)
 					print("I am sorry that is an invalid option, please try again")
 				else:
 					con = False
@@ -271,3 +277,18 @@ class Matrix:
 		print("this feature has not been implemented yet")
 		input("please press any key to contine:")
 		#TODO: Finish automatic Reduction
+
+	def printOperations(self):
+		'''Print Operations
+		   prints out the list of what operations were used
+		   input: void
+		   output: void
+		   preconditions: the operations that will take place have taken place
+		   postconditions: a list will be printed with all of the operations
+		   created: 1 Jan 2014
+		   last updated: 1 jan 2014'''
+
+
+		print("the operations that were used are:\n")
+		for i in range(len(self._operations)):
+			print(str(i) + " " + self._operations[i] + "\n")
