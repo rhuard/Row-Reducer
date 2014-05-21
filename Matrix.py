@@ -235,7 +235,7 @@ class Matrix:
 			con = True
 			while(con == True):
 				choice = int(input("would you like to continue:\n1-Yes\n2-No\n:"))
-				if(choice != 1 and choice != 2)
+				if(choice != 1 and choice != 2):
 					print("I am sorry that is an invalid option, please try again")
 				else:
 					con = False
@@ -275,7 +275,7 @@ class Matrix:
 		created: 28 Dec 2013
 		last updated: 28 Dec 2013'''
 		print("this feature has not been implemented yet")
-		input("please press any key to contine:")
+		input("please press any key to continue:")
 		#TODO: Finish automatic Reduction
 
 	def printOperations(self):
