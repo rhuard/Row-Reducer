@@ -1,8 +1,6 @@
 #Matrix Library
 #writen by Ryan Huard
 
-#TODO: make this program able to take doubles instead of ints
-
 import os
 
 class Matrix:
