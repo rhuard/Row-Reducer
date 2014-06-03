@@ -13,7 +13,7 @@ def main():
 
 	##create matrix object and runs the program	
 	matrix = M.Matrix()
-	matrix.menu()
+	matrix.menu()#menu starts running the program
 
 
 main()
