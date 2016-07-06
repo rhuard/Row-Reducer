@@ -10,5 +10,4 @@ Features:
 2. displays matrix at every step
 3. Displayes the pivots
 
-planned Features:
-1. Automatic row reduction (hopefully)
+this was an early program I wrote when learning Python. Hopefully given time I can come back and refactor it and make it better (see issues)
